@@ -1,0 +1,72 @@
+version: "3.9"
+services:
+    apigw:
+        image: ldov10/gameshop-apigw
+        build: ApiGw/
+        ports:
+            - 5000:5000
+        networks:
+            - app-network
+        depends_on: 
+            - "rabbitmq"
+        restart: on-failure
+    userservice:
+        image: ldov10/gameshop-userservice
+        build: UserService/
+        ports:
+            - 5001:5001
+        networks:
+            - app-network
+        depends_on: 
+            - "rabbitmq"
+        restart: on-failure
+    orderservice:
+        image: ldov10/gameshop-orderservice
+        build: OrderService/
+        ports:
+            - 5004:5004
+        networks:
+            - app-network
+        depends_on: 
+            - "rabbitmq"
+        restart: on-failure
+    catalogservice:
+        image: ldov10/gameshop-catalogservice
+        build: CatalogService/
+        ports:
+            - 5002:5002
+        networks:
+            - app-network
+        depends_on: 
+            - "rabbitmq"
+        restart: on-failure
+    cartservice:
+        image: ldov10/gameshop-cartservice
+        build: CartService/
+        ports: 
+            - 5003:5003
+        networks: 
+            - app-network
+        depends_on: 
+            - "rabbitmq"
+        restart: on-failure
+    rabbitmq:
+        image: rabbitmq:3-management
+        ports:
+            - "4369:4369"
+            - "5671:5671"
+            - "5672:5672"
+            - "25672:25672"
+            - "15671:15671"
+            - "15672:15672"
+        networks: 
+            - app-network
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://localhost:15672"]
+            interval: 30s
+            timeout: 10s
+            retries: 5
+
+networks: 
+    app-network:
+        external: true

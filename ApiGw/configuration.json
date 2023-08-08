@@ -1,0 +1,820 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/authentication/logIn",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "userservice",
+          "Port": 5001
+        }
+      ],
+      "UpstreamPathTemplate": "/login",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/authentication/createUser",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "userservice",
+          "Port": 5001
+        }
+      ],
+      "UpstreamPathTemplate": "/createUser",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/users/getUserPage/pageIndex/{pageIndex}/pageSize/{pageSize}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "userservice",
+          "Port": 5001
+        }
+      ],
+      "UpstreamPathTemplate": "/getUserPage/pageIndex/{pageIndex}/pageSize/{pageSize}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "Admin"
+        ]
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/users/getUserInfo/{identifier}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "userservice",
+          "Port": 5001
+        }
+      ],
+      "ChangeDownstreamPathTemplate": {
+        "identifier": "Claims[identifier] > value"
+      },
+      "UpstreamPathTemplate": "/getUserInfo",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+        ]
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/authentication/refreshTokenVerification",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "userservice",
+          "Port": 5001
+        }
+      ],
+      "UpstreamPathTemplate": "/refreshTokenVerification",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/authentication/getTokens/{identifier}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "userservice",
+          "Port": 5001
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "ChangeDownstreamPathTemplate": {
+        "identifier": "Claims[identifier] > value"
+      },
+      "UpstreamPathTemplate": "/getTokens",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/users/updateUserPermissions/{identifier}/adminIdentifier/{adminIdentifier}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "userservice",
+          "Port": 5001
+        }
+      ],
+      "UpstreamPathTemplate": "/updateUserPermissions/{identifier}",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "Admin"
+        ]
+      },
+      "ChangeDownstreamPathTemplate": {
+        "adminIdentifier": "Claims[identifier] > value"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/users/getRoles",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "userservice",
+          "Port": 5001
+        }
+      ],
+      "UpstreamPathTemplate": "/getRoles",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "Admin"
+        ]
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/users/updateUser/{identifier}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "userservice",
+          "Port": 5001
+        }
+      ],
+      "UpstreamPathTemplate": "/updateUser",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+        ]
+      },
+      "ChangeDownstreamPathTemplate": {
+        "identifier": "Claims[identifier] > value"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/users/postUserImage/userIdentifier/{userIdentifier}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "userservice",
+          "Port": 5001
+        }
+      ],
+      "UpstreamPathTemplate": "/postUserImage",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+        ]
+      },
+      "ChangeDownstreamPathTemplate": {
+        "userIdentifier": "Claims[identifier] > value"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/users/getUserImage/{identifier}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "userservice",
+          "Port": 5001
+        }
+      ],
+      "UpstreamPathTemplate": "/getUserImage",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+        ]
+      },
+      "ChangeDownstreamPathTemplate": {
+        "identifier": "Claims[identifier] > value"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/users/getUserImage/{identifier}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "userservice",
+          "Port": 5001
+        }
+      ],
+      "UpstreamPathTemplate": "/getUserImage/{identifier}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/users/getUserAddresses/{identifier}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "userservice",
+          "Port": 5001
+        }
+      ],
+      "UpstreamPathTemplate": "/getUserAddresses",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+        ]
+      },
+      "ChangeDownstreamPathTemplate": {
+        "identifier": "Claims[identifier] > value"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/users/postUserAddress/{identifier}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "userservice",
+          "Port": 5001
+        }
+      ],
+      "UpstreamPathTemplate": "/postUserAddress",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+        ]
+      },
+      "ChangeDownstreamPathTemplate": {
+        "identifier": "Claims[identifier] > value"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/users/updateUserAddress/{identifier}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "userservice",
+          "Port": 5001
+        }
+      ],
+      "UpstreamPathTemplate": "/updateUserAddress",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+        ]
+      },
+      "ChangeDownstreamPathTemplate": {
+        "identifier": "Claims[identifier] > value"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/users/deleteUserAddress/userIdentifier/{userIdentifier}/address/{addressIdentifier}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "userservice",
+          "Port": 5001
+        }
+      ],
+      "UpstreamPathTemplate": "/deleteUserAddress/{addressIdentifier}",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+        ]
+      },
+      "ChangeDownstreamPathTemplate": {
+        "userIdentifier": "Claims[identifier] > value"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/review/postReview/userIdentifier/{userIdentifier}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "userservice",
+          "Port": 5001
+        }
+      ],
+      "UpstreamPathTemplate": "/postReview",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+        ]
+      },
+      "ChangeDownstreamPathTemplate": {
+        "userIdentifier": "Claims[identifier] > value"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/review/getProductReviews/{identifier}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "userservice",
+          "Port": 5001
+        }
+      ],
+      "UpstreamPathTemplate": "/getProductReviews/{identifier}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/review/deleteReview/{identifier}/userIdentifier/{userIdentifier}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "userservice",
+          "Port": 5001
+        }
+      ],
+      "UpstreamPathTemplate": "/deleteReview/{identifier}",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+        ]
+      },
+      "ChangeDownstreamPathTemplate": {
+        "userIdentifier": "Claims[identifier] > value"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Product/postProduct",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalogservice",
+          "Port": 5002
+        }
+      ],
+      "UpstreamPathTemplate": "/postProduct",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "Admin"
+        ]
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Product/postProductImage/{identifier}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalogservice",
+          "Port": 5002
+        }
+      ],
+      "UpstreamPathTemplate": "/postProductImage/{identifier}",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "Admin",
+          "Manager"
+        ]
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Product/getProductImage/{identifier}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalogservice",
+          "Port": 5002
+        }
+      ],
+      "UpstreamPathTemplate": "/getProductImage/{identifier}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Product/getProductImage/product/{identifier}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalogservice",
+          "Port": 5002
+        }
+      ],
+      "UpstreamPathTemplate": "/getProductImage/product/{identifier}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Product/getProductImagesIds/{identifier}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalogservice",
+          "Port": 5002
+        }
+      ],
+      "UpstreamPathTemplate": "/getProductImagesIds/{identifier}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/brand/postBrand",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalogservice",
+          "Port": 5002
+        }
+      ],
+      "UpstreamPathTemplate": "/postBrand",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "Admin"
+        ]
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/brand/deleteBrand/{identifier}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalogservice",
+          "Port": 5002
+        }
+      ],
+      "UpstreamPathTemplate": "/deleteBrand/{identifier}",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "Admin"
+        ]
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/brand/updateBrand/{identifier}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalogservice",
+          "Port": 5002
+        }
+      ],
+      "UpstreamPathTemplate": "/updateBrand/{identifier}",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "Admin"
+        ]
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/brand/getBrandList",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalogservice",
+          "Port": 5002
+        }
+      ],
+      "UpstreamPathTemplate": "/getBrandList",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/category/updateCategory/{identifier}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalogservice",
+          "Port": 5002
+        }
+      ],
+      "UpstreamPathTemplate": "/updateCategory/{identifier}",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "Admin"
+        ]
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/category/deleteCategory/{identifier}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalogservice",
+          "Port": 5002
+        }
+      ],
+      "UpstreamPathTemplate": "/deleteCategory/{identifier}",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "Admin"
+        ]
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/category/postCategory",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalogservice",
+          "Port": 5002
+        }
+      ],
+      "UpstreamPathTemplate": "/postCategory",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "Admin"
+        ]
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/category/getCategoryList",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalogservice",
+          "Port": 5002
+        }
+      ],
+      "UpstreamPathTemplate": "/getCategoryList",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/product/deleteProduct/{identifier}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalogservice",
+          "Port": 5002
+        }
+      ],
+      "UpstreamPathTemplate": "/deleteProduct/{identifier}",
+      "UpstreamHttpMethod": [ "Delete" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "Admin"
+        ]
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/product/updateProductPrice/{identifier}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalogservice",
+          "Port": 5002
+        }
+      ],
+      "UpstreamPathTemplate": "/updateProductPrice/{identifier}",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "Admin"
+        ]
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/product/getProductPage/pageIndex/{pageIndex}/pageSize/{pageSize}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalogservice",
+          "Port": 5002
+        }
+      ],
+      "UpstreamPathTemplate": "/getProductPage/pageIndex/{pageIndex}/pageSize/{pageSize}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/product/getInactiveProductPage/pageIndex/{pageIndex}/pageSize/{pageSize}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalogservice",
+          "Port": 5002
+        }
+      ],
+      "UpstreamPathTemplate": "/getInactiveProductPage/pageIndex/{pageIndex}/pageSize/{pageSize}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "Admin",
+          "Manager"
+        ]
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/product/getProducts",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalogservice",
+          "Port": 5002
+        }
+      ],
+      "UpstreamPathTemplate": "/getProducts",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/product/getProductDetails/{identifier}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalogservice",
+          "Port": 5002
+        }
+      ],
+      "UpstreamPathTemplate": "/getProductDetails/{identifier}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/product/updateProduct/{identifier}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalogservice",
+          "Port": 5002
+        }
+      ],
+      "UpstreamPathTemplate": "/updateProduct/{identifier}",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "Admin",
+          "Manager"
+        ]
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/product/updateProductActiveState/{identifier}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalogservice",
+          "Port": 5002
+        }
+      ],
+      "UpstreamPathTemplate": "/updateProductActiveState/{identifier}",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+          "Admin",
+          "Manager"
+        ]
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/cart/getUserCartItems/{identifier}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "cartservice",
+          "Port": 5003
+        }
+      ],
+      "UpstreamPathTemplate": "/getUserCartItems",
+      "UpstreamHttpMethod": [ "Get" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+        ]
+      },
+      "ChangeDownstreamPathTemplate": {
+        "identifier": "Claims[identifier] > value"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/cart/addProductToCart/{userIdentifier}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "cartservice",
+          "Port": 5003
+        }
+      ],
+      "UpstreamPathTemplate": "/addProductToCart",
+      "UpstreamHttpMethod": [ "Post" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+        ]
+      },
+      "ChangeDownstreamPathTemplate": {
+        "userIdentifier": "Claims[identifier] > value"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/cart/removeProductFromCart/user/{userIdentifier}/product/{productIdentifier}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "cartservice",
+          "Port": 5003
+        }
+      ],
+      "UpstreamPathTemplate": "/removeProductFromCart/product/{productIdentifier}",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+        ]
+      },
+      "ChangeDownstreamPathTemplate": {
+        "userIdentifier": "Claims[identifier] > value"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/cart/setCartQuantity/user/{userIdentifier}/product/{productIdentifier}/quantity/{quantity}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "cartservice",
+          "Port": 5003
+        }
+      ],
+      "UpstreamPathTemplate": "/setCartQuantity/product/{productIdentifier}/quantity/{quantity}",
+      "UpstreamHttpMethod": [ "Put" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+        ]
+      },
+      "ChangeDownstreamPathTemplate": {
+        "userIdentifier": "Claims[identifier] > value"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Order/postOrder/user/{userIdentifier}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "orderservice",
+          "Port": 5004
+        }
+      ],
+      "UpstreamPathTemplate": "/postOrder",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+        ]
+      },
+      "ChangeDownstreamPathTemplate": {
+        "userIdentifier": "Claims[identifier] > value"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Order/updateOrderState/user/{userIdentifier}/order/{orderIdentifier}/newState/{newState}/userRole/{userRole}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "orderservice",
+          "Port": 5004
+        }
+      ],
+      "UpstreamPathTemplate": "/updateOrderState/order/{orderIdentifier}/newState/{newState}",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+        ]
+      },
+      "ChangeDownstreamPathTemplate": {
+        "userIdentifier": "Claims[identifier] > value",
+        "userRole": "Claims[scope] > value"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Order/getOrders/user/{userIdentifier}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "orderservice",
+          "Port": 5004
+        }
+      ],
+      "UpstreamPathTemplate": "/getOrders",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [
+        ]
+      },
+      "ChangeDownstreamPathTemplate": {
+        "userIdentifier": "Claims[identifier] > value"
+      }
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:5000"
+  },
+  "Secrets": {
+    "secretKey": "tZn1OMVOgstcATIi6BlMcFUZpPtuIyD77aJCjUnmje8jz2F2h5wHLrCLWvE_Akk_a6Gts9hCl6bu8g1HOtKN1fe1VzLZl6yUo62MRknRdxFX-KdQCutR7CJdSTE1OQpJXwFqXaJFsL3NSn_pI90ZTXYlQUKxARDX0jeLy8sHzz0"
+  }
+}
